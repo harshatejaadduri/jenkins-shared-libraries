@@ -26,12 +26,12 @@ def call(Map configMap){
                     }
                 }
             }
-            stage('Install dependencies'){
-                steps{
-                    script{
-                        sh """
-                            mvn clean packages
-                            """
+            stage('Install Dependencies') {
+                steps {
+                    script {
+                    sh """
+                        mvn clean package 
+                    """
                     }
                 }
             }
