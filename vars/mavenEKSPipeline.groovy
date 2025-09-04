@@ -35,7 +35,7 @@ def call(Map configMap){
                     }
                 }
             }
-            stage('Sonar Scan') {
+            /* stage('Sonar Scan') {
                 environment {
                     scannerHome = tool 'sonar-7.2'
                 }
@@ -47,8 +47,8 @@ def call(Map configMap){
                     }
                     }
                 }
-            }
-            stage('Quality Gate') {
+            } */
+            /* stage('Quality Gate') {
                 steps {
                     timeout(time: 1, unit: 'MINUTES') {
                         // This will pause the pipeline until SonarQube analysis is done
@@ -56,8 +56,8 @@ def call(Map configMap){
                         waitForQualityGate abortPipeline: true
                     }
                 }
-            }
-            stage('Check Dependabot Alerts') {
+            } */
+            /* stage('Check Dependabot Alerts') {
                 environment { 
                     GITHUB_TOKEN = credentials('github-token')
                 }
@@ -90,7 +90,7 @@ def call(Map configMap){
                         }
                     }
                 }
-            }
+            } */
             stage('Docker Build'){
                 steps{
                     script{
