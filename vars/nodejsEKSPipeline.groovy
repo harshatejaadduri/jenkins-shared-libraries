@@ -29,12 +29,9 @@ def call(Map configMap){
             stage('Install dependencies'){
                 steps{
                     script{
-                        sh """
-                            
+                        sh """ 
                             npm install
-                            npm audit fix --force
-                            
-                            """
+                           """
                     }
                 }
             }
