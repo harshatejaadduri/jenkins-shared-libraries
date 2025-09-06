@@ -11,8 +11,7 @@ def call (Map configMap){
             COMPONENT = "component" 
         }
         options{
-            disableConcurrentBuilds(),
-            ansiColor('xterm')
+            disableConcurrentBuilds()
         }
         parameters{
             string(name: 'appVersion', description: 'Image version of the application')
