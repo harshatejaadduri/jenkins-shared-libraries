@@ -30,8 +30,9 @@ def call(Map configMap){
                 steps{
                     script{
                         sh """
-                            npm audit fix --force
+                            
                             npm install
+                            npm audit fix --force
                             
                             """
                     }
