@@ -23,7 +23,7 @@ def call (Map configMap){
                 script{
                     withAWS(credentials: 'aws-creds', region: 'us-east-1'){
                             sh """
-                                aws eks update-kubeconfig --region $REGION --name "k8-$PROJECT-${params.deploy_to}"
+                                aws eks update-kubeconfig --region $REGION --name "$PROJECT-${params.deploy_to}"
                                 kubectl apply -f namespace.yaml
                                 helm upgrade --install $COMPONENT -f values-${params.deploy_to}.yaml -n $PROJECT .
                                 """
