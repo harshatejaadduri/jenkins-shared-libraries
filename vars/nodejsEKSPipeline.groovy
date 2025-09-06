@@ -30,7 +30,9 @@ def call(Map configMap){
                 steps{
                     script{
                         sh """
+                            npm audit fix --force
                             npm install
+                            
                             """
                     }
                 }
@@ -106,7 +108,7 @@ def call(Map configMap){
                                 else
                                     echo "Repository $REPO_NAME already exists. Skipping creation."
                                 fi
-                                
+
                                 docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
                                 """
                         }      
