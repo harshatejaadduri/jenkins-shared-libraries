@@ -11,7 +11,7 @@ def call (Map configMap){
             COMPONENT = "component" 
         }
         options{
-            disableConcurrentBuilds()
+            disableConcurrentBuilds(),
             ansiColor('xterm')
         }
         parameters{
