@@ -98,7 +98,15 @@ def call(Map configMap){
                             sh """
                                 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
                                 docker build -t ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion} .
-                                aws ecr create-repository --repository-name ${PROJECT}/${COMPONENT} --region ${REGION}
+                                REPO_NAME="${PROJECT}/${COMPONENT}"
+
+                                if ( ! aws ecr describe-repositories --repository-names "$REPO_NAME" --region "$REGION" ); then
+                                    echo "Repository $REPO_NAME does not exist. Creating..."
+                                    aws ecr create-repository --repository-name "$REPO_NAME" --region "$REGION"
+                                else
+                                    echo "Repository $REPO_NAME already exists. Skipping creation."
+                                fi
+                                
                                 docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
                                 """
                         }      
