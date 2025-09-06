@@ -35,7 +35,7 @@ def call(Map configMap){
                     }
                 }
             }
-            stage('Sonar Scan') {
+           /*  stage('Sonar Scan') {
                 environment {
                     scannerHome = tool 'sonar-7.2'
                 }
@@ -90,7 +90,7 @@ def call(Map configMap){
                         }
                     }
                 }
-            }
+            } */
             stage('Docker Build'){
                 steps{
                     script{
@@ -98,6 +98,7 @@ def call(Map configMap){
                             sh """
                                 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
                                 docker build -t ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion} .
+                                aws ecr create-repository --repository-name ${PROJECT}/${COMPONENT} --region ${REGION}
                                 docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
                                 """
                         }      
@@ -118,7 +119,7 @@ def call(Map configMap){
                         wait: false
                     }
                 }
-        }
+            }
         }
         post{
             always{

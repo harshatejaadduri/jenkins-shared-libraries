@@ -108,7 +108,7 @@ def call(Map configMap){
             stage('Trigger Deploy'){
                 when{
                         expression{ params.deploy }
-                        }
+                    }
                 steps {
                     script{
                         build job: '../${COMPONENT}-cd',
